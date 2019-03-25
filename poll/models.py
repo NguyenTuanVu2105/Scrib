@@ -27,3 +27,6 @@ class PollUser(models.Model):
     poll = models.ForeignKey(Poll, on_delete=models.CASCADE)
     user = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     is_created_user = models.BooleanField()
+
+    class Meta:
+        db_table = "poll_user"
