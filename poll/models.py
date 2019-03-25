@@ -7,8 +7,7 @@ class Poll(models.Model):
     name = models.CharField(max_length=100)
     location = models.CharField(max_length=100)
     note = models.TextField()
-    user_attend = models.ManyToManyField(UserProfile, related_name="attend_poll")
-    user_create = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name="create_poll")
+    user_attend = models.ManyToManyField(UserProfile, through="PollUser", related_name="attend_poll")
     date_create = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -23,3 +22,8 @@ class PollTime(models.Model):
     class Meta:
         db_table = "polltime"
 
+
+class PollUser(models.Model):
+    poll = models.ForeignKey(Poll, on_delete=models.CASCADE)
+    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+    is_created_user = models.BooleanField()
