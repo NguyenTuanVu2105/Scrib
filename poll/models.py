@@ -7,7 +7,7 @@ class Poll(models.Model):
     name = models.CharField(max_length=100)
     location = models.CharField(max_length=100)
     note = models.TextField()
-    user_attend = models.ManyToManyField(UserProfile, through="PollUser", related_name="attend_poll")
+    user = models.ManyToManyField(UserProfile, through="PollUser", related_name="attend_poll")
     date_create = models.DateTimeField(auto_now_add=True)
 
     class Meta:
