@@ -29,7 +29,7 @@
     <link href="{% static 'css/index.css'%}" rel="stylesheet">
     <link href="{% static 'css/form/style.css'%}" rel="stylesheet">
     <link href="{% static 'css/form/popuo-box.css'%}" rel="stylesheet">
-    {% block 'css' %}
+    {% block css %}
     {% endblock %}
 
   <!-- =======================================================
@@ -52,7 +52,7 @@
         <a href="#intro" class="scrollto"><img src="{%  static 'img/logo.png' %}" alt="" title=""></a>
       </div>
 
-        {% block 'menu-item'%}
+        {% block menu-item%}
         {% endblock %}
     </div>
   </header><!-- #header -->
@@ -62,7 +62,7 @@
   ============================-->
 <section id="intro">
     <div class="intro-container">
-    {% block 'content' %}
+    {% block content %}
         {% endblock %}
   </div>
   </section>
