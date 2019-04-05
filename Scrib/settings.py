@@ -44,12 +44,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'bootstrap4',
+    'bootstrap3',
     'bootstrap_datepicker_plus',
 
 ]
 
-BOOTSTRAP4 = {
+BOOTSTRAP3 = {
     'include_jquery': True,
 }
 
