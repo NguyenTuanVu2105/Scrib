@@ -36,13 +36,22 @@ ALLOWED_HOSTS = [
 INSTALLED_APPS = [
     'user',
     'poll',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'bootstrap3',
+    'bootstrap_datepicker_plus',
+
 ]
+
+BOOTSTRAP3 = {
+    'include_jquery': True,
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -134,3 +143,5 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
     '/var/www/static/',
 ]
+
+LOGIN_URL = "/login/"

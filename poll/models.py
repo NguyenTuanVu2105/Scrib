@@ -15,10 +15,10 @@ class Poll(models.Model):
 
 
 class PollTime(models.Model):
-    start_time = models.DateTimeField()
-    end_time = models.DateTimeField()
+    date = models.DateField()
+    start_time = models.TimeField()
+    end_time = models.TimeField()
     poll = models.ForeignKey(Poll, on_delete=models.CASCADE)
-
     class Meta:
         db_table = "polltime"
 
