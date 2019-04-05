@@ -1,0 +1,28 @@
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    <div id="page" class="container-fluid">
+        <div id="header">
+        {% include "layout/header.html" %}
+    </div>
+        <div id="main" class="row">
+            <div id="sidebar">
+                {% include "layout/sidebar.html" %}
+            </div>
+            <div id="content">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+        <div id="footer">
+            {% include "layout/footer.html" %}
+        </div>
+    </div>
+</body>
+</html>
