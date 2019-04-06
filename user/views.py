@@ -32,5 +32,5 @@ def login(request):
             login(request, user)
             return redirect(request, r"^$")
     form = UserForm()
-    return render(request, "login.html", {"form": form})
+    return render(request, "user/login.html", {"form": form})
 

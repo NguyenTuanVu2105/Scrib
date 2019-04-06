@@ -1,0 +1,26 @@
+{% extends "layout/base.html" %}
+{% load staticfiles %}
+{% block css %}
+    <link rel="stylesheet" href="{% static "css/user/login.css" %}">
+{% endblock %}
+{% block content %}
+     <div class="login-form">
+    <form action="" method="post">
+        <h2 class="text-center">Đăng nhập</h2>
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Tài khoản" required="required">
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-control" placeholder="Mật khẩu" required="required">
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-block">Đăng nhập</button>
+        </div>
+        <div class="clearfix">
+            <label class="pull-left checkbox-inline"><input type="checkbox"> Nhớ mật khẩu</label>
+            <a href="#" class="pull-right">Quên mật khẩu?</a>
+        </div>
+    </form>
+    <p class="text-center"><a href="#">Tạo tài khoản</a></p>
+</div>
+{% endblock %}

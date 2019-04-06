@@ -1,16 +1,29 @@
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">SCRIB</a>
-    </div>
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
-      <li><a href="#">Page 1</a></li>
-      <li><a href="#">Page 2</a></li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-      <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-    </ul>
-  </div>
+{% load staticfiles %}
+<nav class="navbar navbar-expand-sm navbar-dark">
+  <!-- Brand -->
+  <a class="navbar-brand" href="/">
+      <img height="35px" src="{% static 'img/logo.png'%}">
+  </a>
+
+  <!-- Links -->
+  <ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
+
+    <!-- Dropdown -->
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+        Tài khoản
+      </a>
+      <div class="dropdown-menu classic-dropdown">
+        <a class="dropdown-item" href="/login/">
+            <i class="fa fa-user"></i>
+            Đăng nhập
+        </a>
+        <a class="dropdown-item" href="/signup/">
+
+            <i class="fa fa-user-plus"></i> Đăng ký
+        </a>
+      </div>
+    </li>
+
+  </ul>
 </nav>
