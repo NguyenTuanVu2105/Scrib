@@ -2,25 +2,27 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from .forms import LoginForm, SignUpForm
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import authenticate, login as auth_login
 from django.contrib import messages
-from django.views.generic import FormView
+from django.views.generic import FormView, CreateView
 from django.urls import reverse, reverse_lazy
 
 # Create your views here.
 
-def signup(request):
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        email = request.POST.get('email')
-        if not authenticate(username=username):
-            user = User.objects.create_user(username, email, password)
-            user.save()
-            return redirect(request, r"^$")
-    form = SignUpForm()
-    return render(request, "user/signup.html", {"form": form})
+class SignUpView(CreateView):
+    template_name = "user/signup.html"
+    model = User
+    success_url = reverse_lazy("user:login")
+    form_class = UserCreationForm
+
+    def get_success_url(self):
+        return reverse_lazy("user:login")
+
+    def form_valid(self, form):
+        form.save()
+        messages.success(self.request, "Bạn đã đăng ký thành công. Xin mời đăng nhập")
+        return HttpResponseRedirect(self.get_success_url())
 
 
 class LoginView(FormView):
@@ -28,6 +30,9 @@ class LoginView(FormView):
     form_class = AuthenticationForm
 
     def get_success_url(self):
+        nextlink = self.request.POST.get('next', False)
+        if nextlink:
+            return nextlink
         return reverse_lazy("index")
 
     def form_valid(self, form):
