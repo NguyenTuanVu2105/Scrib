@@ -13,16 +13,14 @@
     {% endblock %}
 </head>
 <body>
-    <div class="container-fluid">
-            <header>
-                {% include "layout/header.html" %}
-            </header>
-
+    <div class="container shadow">
+        <div class="header">
+            {% include "layout/header.html" %}
+        </div>
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
                     {% block content %}
-
                     {% endblock %}
                 </div>
             </div>

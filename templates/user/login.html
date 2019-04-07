@@ -5,14 +5,25 @@
 {% endblock %}
 {% block content %}
      <div class="login-form">
-    <form action="" method="post">
+    <form action="{% url "user:login" %}" method="post">
+        {% csrf_token %}
         <h2 class="text-center">Đăng nhập</h2>
+        {% for message in messages %}
+
+                    <div class="alert alert-danger small ">
+                        <a class="close" href="#" data-dismiss="alert">×</a>
+
+                        {{ message }}
+
+                    </div>
+        {% endfor %}
         <div class="form-group">
-            <input type="text" class="form-control" placeholder="Tài khoản" required="required">
+            <input type="text" class="form-control" placeholder="Tài khoản" name="username" required="required">
         </div>
         <div class="form-group">
-            <input type="password" class="form-control" placeholder="Mật khẩu" required="required">
+            <input type="password" class="form-control" placeholder="Mật khẩu"  name="password" required="required">
         </div>
+
         <div class="form-group">
             <button type="submit" class="btn btn-primary btn-block">Đăng nhập</button>
         </div>
