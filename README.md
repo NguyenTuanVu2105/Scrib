@@ -6,6 +6,10 @@
 - Nguyễn Duy Chương
 - Phạm Minh Đức
 
+### Link xem tiến độ công việc 
+https://docs.google.com/spreadsheets/d/12RsD-IIKjeRqJZIg17fdHyoz-jDjkkhPMZh2Ftz9CuA/edit?usp=sharing
+
+
 ### Tên ứng dụng: Scrib.
 ### Đối tượng hướng đến: Các doanh nghiệp, công ty, trường học,....
 ### Mô tả tóm tắt phần mềm:
