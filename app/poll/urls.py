@@ -4,5 +4,6 @@ from . import views
 
 app_name = "poll"
 urlpatterns = [
-    url(r"^<int:id>/", views.poll)
+    url(r"^<int:id>/", views.poll),
+    url(r"^show/", views.pollListView)
 ]
