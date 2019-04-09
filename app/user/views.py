@@ -32,7 +32,7 @@ class LoginView(FormView):
         nextlink = self.request.POST.get('next', False)
         if nextlink:
             return nextlink
-        return reverse_lazy("index")
+        return reverse_lazy("poll:dashboard")
 
     def form_valid(self, form):
         user = form.get_user()

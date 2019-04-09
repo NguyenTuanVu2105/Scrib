@@ -235,6 +235,15 @@ footer{
   cursor: pointer;
 }
 
-.mg-top-15{
-    margin-top: 15px;
+.mg-top-40{
+    margin-top: 40px;
 }
+
+    .nav-item{
+        background-color: #eeeeee;
+        border-bottom-style: ridge;
+    }
+
+    .sub-item{
+        background-color: #ffffFF;
+    }

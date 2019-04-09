@@ -41,7 +41,7 @@ class PollUser(models.Model):
         db_table = "poll_user"
 
     def __str__(self):
-        return str.format("{0}  {1}", self.user.username, self.poll.name)
+        return self.user.username
 
 
 class Vote(models.Model):
