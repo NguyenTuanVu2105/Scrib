@@ -3,7 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from .forms import LoginForm, SignUpForm
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
-from django.contrib.auth import authenticate, login as auth_login
+from django.contrib.auth import authenticate, login as auth_login, logout
 from django.contrib import messages
 from django.views.generic import FormView, CreateView
 from django.urls import reverse, reverse_lazy
@@ -46,3 +46,8 @@ class LoginView(FormView):
         messages.error(
             self.request, 'Sai tên đăng nhập hoặc mật khẩu')
         return response
+
+
+def logout_user(request):
+    logout(request)
+    return HttpResponseRedirect(reverse_lazy('index'))
