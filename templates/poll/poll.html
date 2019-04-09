@@ -1,0 +1,13 @@
+{% extends "layout/base.html" %}
+{% block title%}Chi tiết{% endblock %}
+{% block content %}
+<h3><a href="poll/{{poll:id}}">{{poll.name}}</a> </h3>
+<h6> {{poll.location}}</h6>
+<h6> {{poll.note}} </h6>
+form = VoteForm
+<form>
+ {% csrf_token %}
+ {{form.as_p}}
+ <input type="submit" value="Vote"/>
+</form>
+ {% endblock %}
