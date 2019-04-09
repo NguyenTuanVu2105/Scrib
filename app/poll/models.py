@@ -30,6 +30,7 @@ class PollTime(models.Model):
     def __str__(self):
         return str.format("{0} {1} - {2}", str(self.date), str(self.start_time), str(self.end_time))
 
+
 class PollUser(models.Model):
     poll = models.ForeignKey(Poll, on_delete=models.CASCADE)
     user = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
@@ -38,8 +39,8 @@ class PollUser(models.Model):
     class Meta:
         db_table = "poll_user"
 
-    def __str__ (self):
-        return str.format(self.user.usernamen)
+    def __str__(self):
+        return str.format(self.user.user.username)
 
 
 class Vote(models.Model):
@@ -48,3 +49,6 @@ class Vote(models.Model):
 
     class Meta:
         db_table = "vote"
+
+    def __str__(self):
+        return str(self.user)

@@ -15,12 +15,13 @@ class SignUpView(CreateView):
     model = User
     success_url = reverse_lazy("user:login")
     form_class = UserCreationForm
+
     def get_success_url(self):
         return reverse_lazy("user:login")
 
     def form_valid(self, form):
         user = form.save()
-        userprofile = UserProfile(user= user)
+        userprofile = UserProfile(user = user)
         userprofile.save()
         messages.success(self.request, "Bạn đã đăng ký thành công. Xin mời đăng nhập")
         return HttpResponseRedirect(self.get_success_url())
@@ -49,6 +50,3 @@ class LoginView(FormView):
         return response
 
 
-def logout_user(request):
-    logout(request)
-    return HttpResponseRedirect(reverse_lazy('index'))
