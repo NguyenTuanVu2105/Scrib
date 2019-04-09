@@ -1,0 +1,54 @@
+    /* Remove the navbar's default margin-bottom and rounded borders */
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+
+    /* Add a gray background color and some padding to the footer */
+    footer {
+      background-color: #f2f2f2;
+      padding: 25px;
+    }
+
+  .carousel-inner img {
+      width: 100%; /* Set width to 100% */
+      margin: auto;
+      min-height:200px;
+  }
+
+  /* Hide the carousel text when the screen is less than 600 pixels wide */
+  @media (max-width: 600px) {
+    .carousel-caption {
+      display: none;
+    }
+  }
+
+    .bg_purple{
+        background-color: #563d7c;
+    }
+
+    .cl_white{
+        color: white;
+    }
+
+    .intro{
+        min-height: 250px;
+    }
+
+    @media(max-width: 600px){
+        .intro{
+            min-height: 400px;
+        }
+    }
+    .img-intro{
+        position: relative;
+        bottom: 150px;
+    }
+
+    .relative{
+        position: relative;
+    }
+
+    .shadow{
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }

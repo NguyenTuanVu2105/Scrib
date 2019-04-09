@@ -1,29 +1,30 @@
 {% load staticfiles %}
-<div class="navbar navbar-expand-sm navbar-dark">
-  <!-- Brand -->
-  <a class="navbar-brand" href="/">
-      <img height="35px" src="{% static 'img/logo.png'%}">
-  </a>
 
-  <!-- Links -->
-  <ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
+<nav class="navbar navbar-inverse" style="background: #563d7c;">
+  <div class="container">
+    <div class="navbar-header">
+        <div class="logo-container">
+            <a href="/"><img src="{% static 'img/logo.png' %}" height="40px" style="padding-top: 5px; padding-bottom: 5px;" alt="Book Review System"></a>
+        </div>
 
-    <!-- Dropdown -->
-    <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-        Tài khoản
-      </a>
-      <div class="dropdown-menu dropdown-menu-right">
-        <a class="dropdown-item" href="/login/">
-            <i class="fa fa-user"></i>
-            Đăng nhập
-        </a>
-        <a class="dropdown-item" href="/signup/">
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+        {% if request.user.is_authenticated %}
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tài khoản <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Dashboard</a></li>
+                            <li><a href="#">Hồ sơ</a></li>
+                            <li><a href="#">Cuộc họp của tôi</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">Đăng xuất</a></li>
+                        </ul>
+                    </li>
 
-            <i class="fa fa-user-plus"></i> Đăng ký
-        </a>
-      </div>
-    </li>
-
-  </ul>
-</div>
+        {% else %}
+          <li><a href="{% url 'user:signup' %}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+          <li><a href="{% url 'user:login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        {% endif %}
+    </ul>
+  </div>
+</nav>

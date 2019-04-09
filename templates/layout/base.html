@@ -1,34 +1,45 @@
 {% load staticfiles %}
-{% load bootstrap4 %}
-{% bootstrap_css %}
-{% bootstrap_javascript jquery='full' %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}{% endblock %}</title>
+    <title>{% block title %}Scrib{% endblock %}</title>
+
+    <link rel="stylesheet" href="{% static 'lib/bootstrap/css/bootstrap.min.css' %}">
+
     <link rel="stylesheet" href="{% static "css/base/style.css" %}">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     {% block css %}
     {% endblock %}
 </head>
-<body>
-    <div class="container shadow">
-        <div class="header">
-            {% include "layout/header.html" %}
-        </div>
-        <div class="content">
-            <div class="container-fluid">
-                <div class="row">
+<body class="page page-template fixed-header contains-posts no-slider icons-style-light parallax-header fixed-header-scroll">
+    <div id="main-container">
+        <div class="page-wrapper">
+            {% include 'layout/header.html' %}
+
+            <div id="content-container" class="content-boxed layout-right blog-twocolumn blog-twocolumn-sidebar">
+                <div id="content" class="content">
                     {% block content %}
                     {% endblock %}
                 </div>
+
+
+                <div class="clear"></div>
             </div>
         </div>
+
+      <!--  {% include 'layout/footer.html' %} -->
     </div>
 
 
     <!--Javascript-->
+    <script type='text/javascript' src="{% static 'lib/jquery/jquery-3.3.1.min.js' %}"></script>
+    <script type='text/javascript' src="{% static 'lib/bootstrap/js/bootstrap.min.js' %}"></script>
     {% block js %}
     {% endblock %}
 </body>
