@@ -7,7 +7,6 @@ from django.contrib.auth import authenticate, login as auth_login, logout
 from django.contrib import messages
 from django.views.generic import FormView, CreateView
 from django.urls import reverse, reverse_lazy
-from .models import UserProfile
 # Create your views here.
 
 class SignUpView(CreateView):
@@ -20,9 +19,7 @@ class SignUpView(CreateView):
         return reverse_lazy("user:login")
 
     def form_valid(self, form):
-        user = form.save()
-        userprofile = UserProfile(user = user)
-        userprofile.save()
+        form.save()
         messages.success(self.request, "Bạn đã đăng ký thành công. Xin mời đăng nhập")
         return HttpResponseRedirect(self.get_success_url())
 

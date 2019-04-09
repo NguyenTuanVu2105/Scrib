@@ -1,5 +1,6 @@
 from django.db import models
-from app.user.models import UserProfile
+
+from django.contrib.auth.models import User
 
 
 # Create your models here.
@@ -7,9 +8,9 @@ class Poll(models.Model):
     name = models.CharField(max_length=100)
     location = models.CharField(max_length=100)
     note = models.TextField()
-    user_attend = models.ManyToManyField(UserProfile, through="PollUser", related_name="attend")
+    user_attend = models.ManyToManyField(User, through="PollUser", related_name="attend")
     date_create = models.DateTimeField(auto_now=True)
-    user_create = models.ForeignKey(UserProfile, on_delete=models.CASCADE, verbose_name="create")
+    user_create = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="create")
 
     class Meta:
         db_table = "poll"
@@ -33,19 +34,19 @@ class PollTime(models.Model):
 
 class PollUser(models.Model):
     poll = models.ForeignKey(Poll, on_delete=models.CASCADE)
-    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     is_voted = models.BooleanField()
 
     class Meta:
         db_table = "poll_user"
 
     def __str__(self):
-        return str.format(self.user.user.username)
+        return str.format(self.user)
 
 
 class Vote(models.Model):
     time = models.ForeignKey(PollTime, on_delete=models.CASCADE)
-    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     class Meta:
         db_table = "vote"
