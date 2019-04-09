@@ -7,7 +7,6 @@ from django.contrib.auth import authenticate, login as auth_login, logout
 from django.contrib import messages
 from django.views.generic import FormView, CreateView
 from django.urls import reverse, reverse_lazy
-
 # Create your views here.
 
 class SignUpView(CreateView):
@@ -48,6 +47,3 @@ class LoginView(FormView):
         return response
 
 
-def logout_user(request):
-    logout(request)
-    return HttpResponseRedirect(reverse_lazy('index'))
