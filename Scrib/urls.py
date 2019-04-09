@@ -21,5 +21,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'', include('app.user.urls', namespace='user')),
     url(r'^', include('app.poll.urls', namespace='poll')),
-    url(r'^$', TemplateView.as_view(template_name="index.html"), name='index'),
+    url(r'^$', TemplateView.as_view(template_name="layout/base.html"), name='index'),
 ]
