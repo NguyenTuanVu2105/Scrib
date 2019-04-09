@@ -16,3 +16,7 @@ def show(request):
 
 def dashboard(request):
     return render(request, "poll/dashboard.html")
+
+def created(request):
+    mypolls = Poll.objects.filter(user_create_id=request.user.id)
+    return render(request, 'poll/create.html', {'mypolls': mypolls})

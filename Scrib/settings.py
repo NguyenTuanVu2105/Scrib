@@ -96,7 +96,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'HOST': 'localhost',
         'NAME': 'scrib',
-        'USER': 'kennen',
+        'USER': 'root',
         'PASSWORD': '',
     }
 }
