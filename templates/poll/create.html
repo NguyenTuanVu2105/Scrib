@@ -1,26 +1,77 @@
 {% extends "layout/base.html" %}
 {% load staticfiles %}
-{% block title%}Chi tiết{% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'lib/jquery/jquery-ui.css' %}">
+    <link rel="stylesheet" href="{% static 'lib/datetimepicker/jquery-ui-timepicker-addon.css' %}">
+{% endblock %}
+
 {% block content %}
-<div >
-    <h2>Các cuộc họp bạn đã tạo</h2>
-<table class="table">
-    <thead>
-    <tr>
-        <th>Tên</th>
-        <th>Địa điểm</th>
-        <th>Ghi chú</th>
-    </tr>
-    </thead>
-    <tbody>
-    {% for mypoll in mypolls %}
-    <tr>
-        <td><a href="#">{{ mypoll.name }}</a></td>
-        <td>{{ mypoll.location }}</td>
-        <td>{{ mypoll.note }}</td>
-    </tr>
-    {% endfor %}
-    </tbody>
-</table>
-</div>
+    <!-- Main content -->
+        <div class="row pd-10">
+            <div class="col-md-12">
+                <form action="{% url "poll:add" %}" method="POST">
+
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label>Tên cuộc họp</label>
+                                <input type="text" class="form-control" placeholder="Tên cuộc họp" value="" name="name">
+                                <span class="help-block"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Địa điểm</label>
+                                <input type="text" class="form-control" placeholder="Địa điểm" name="location">
+                                <span class="help-block"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Ghi chú</label>
+                                <textarea class="form-control autosizeme" placeholder="Tham khảo" rows="5" name="note" cols="50"></textarea>
+                                <span class="help-block"></span>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-12 form-group">
+                                    <label>Thời gian</label>
+                                    <div class="hidden" id="new_poll">
+                                        <div class="row mg-top-10">
+                                            <div class="col-md-3">
+                                                <input class="datepicker form-control" type="text" autocomplete="off" placeholder="Ngày diễn ra">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <input class="timepicker form-control" type="text" autocomplete="off" placeholder="Thời gian bắt đầu" name="start_time">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <input class="timepicker form-control" type="text" autocomplete="off" placeholder="Thời gian kết thúc" name="end_time">
+                                            </div>
+                                            <div class="col-md-1">
+                                                <button class="btn btn-sm btn-danger time-remove" type="button">
+                                                    <i class="fa fa-close"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div class="mg-top-10" id="add-time-before-me">
+                                            <button class="btn btn-sm btn-success" type="button" onclick="addPoll()">
+                                                <i class="fa fa-plus"></i> Thêm thời gian
+                                            </button>
+                                        </div>
+                                </div>
+                            </div>
+                        <!-- /.box-body -->
+                        <div class="box-footer">
+                            <input type="submit" value="Lưu" class="btn btn-primary pull-right mr-15">
+                        </div>
+                </form>
+            </div>
+        </div>
+
+
+    <!-- /.content -->
+{% endblock %}
+{% block js %}
+        <script src="{% static "lib/jquery/jquery-ui.js" %}"></script>
+    <script src="{% static "lib/datetimepicker/jquery-ui-timepicker-addon.js" %}"></script>
+    <script src="{% static 'js/poll_create.js' %}"></script>
+
 {% endblock %}

@@ -3,9 +3,6 @@
 	text-align: center;
 }
 
-i{
-	width: 25px;
-}
 
 .container-fluid{
 	padding: 0px;
@@ -246,4 +243,40 @@ footer{
 
     .sub-item{
         background-color: #ffffFF;
+    }
+
+    .bg-solid{
+        background-color: #eff3f8;
+    }
+
+    .content{
+        background-color: white;
+        box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+        border-radius: 3px;
+        border-top: 3px solid #d2d6de;
+
+    }
+
+    .red{
+        background-color: red;
+    }
+
+    .pr-10{
+        padding-right: 10px;
+    }
+
+    .pd-5{
+        padding: 5px;
+    }
+
+    .pd-10{
+        padding: 10px;
+    }
+
+    .mr-15{
+        margin-right: 15px;
+    }
+
+    .mg-top-10{
+        margin-top: 10px;
     }
