@@ -1,8 +1,14 @@
+from django.views.generic.detail import SingleObjectMixin
 from django.shortcuts import render
-from .models import Poll
-from .models import PollUser
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
+from app.core.views import LoginRequiredMixin
+from django.views.generic import FormView, CreateView
+from django.urls import reverse, reverse_lazy
+from .models import Poll, PollTime, PollUser
+from .forms import PollTimeForm, PollForm
 # Create your views here.
+
 
 def poll(request, id):
     poll = Poll.objects.get(id=id)
@@ -17,6 +23,12 @@ def show(request):
 def dashboard(request):
     return render(request, "poll/dashboard.html")
 
-def created(request):
+
+@login_required
+def mypoll(request):
     mypolls = Poll.objects.filter(user_create_id=request.user.id)
-    return render(request, 'poll/create.html', {'mypolls': mypolls})
+    return render(request, 'poll/created.html', {'mypolls': mypolls})
+
+
+def create(request):
+    return render(request, "poll/add.html")

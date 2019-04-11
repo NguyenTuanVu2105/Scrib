@@ -24,7 +24,9 @@ function removeTime() {
 }
 
 function addTimePicker() {
-     $('input.timepicker').timepicker();
+         $(document).on('focus','.timepicker', function(){
+                          $(this).removeClass('hasDatepicker').timepicker();
+                       });
 }
 
 function addDatePicker() {
