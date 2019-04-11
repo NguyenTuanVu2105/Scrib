@@ -27,8 +27,8 @@ def dashboard(request):
 @login_required
 def mypoll(request):
     mypolls = Poll.objects.filter(user_create_id=request.user.id)
-    return render(request, 'poll/created.html', {'mypolls': mypolls})
+    return render(request, 'poll/mypoll.html', {'mypolls': mypolls})
 
 
 def create(request):
-    return render(request, "poll/add.html")
+    return render(request, "poll/create.html")
