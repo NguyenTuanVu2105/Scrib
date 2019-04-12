@@ -1,6 +1,6 @@
 from django.views.generic.detail import SingleObjectMixin
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse,HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from app.core.views import LoginRequiredMixin
 from django.views.generic import FormView, CreateView
@@ -34,8 +34,27 @@ def mypoll(request):
 
 
 def create(request):
-    return render(request, "poll/create.html")
+    if request.method == "POST":
+        # --- Xu ly Poll ---
+        form = PollForm(request.POST)
+        if form.is_valid():
+            poll = form.save(commit=False)
+            poll.user_create = request.user
+            poll.save()
+            poll_manager = PollUser(user=request.user, poll= poll, is_voted=True)
+            poll_manager.save()
 
+            #--- Xu ly time
+            cd = request.POST
+            dates = cd.getlist("date")
+            start_times = cd.getlist("start_time")
+            end_times = cd.getlist("end_time")
+            for i in range(len(dates)):
+                time = PollTime(poll=poll, date=dates[i], start_time=start_times[i], end_time=end_times[i])
+                time.save()
+                return HttpResponseRedirect(reverse_lazy("poll:mypoll"))
+
+    return render(request, "poll/create.html")
 
 def listpollisvote(request):
     listpolls = PollUser.objects.all().values('poll__name', 'poll__location', 'is_voted')

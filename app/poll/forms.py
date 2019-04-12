@@ -13,6 +13,23 @@ class PollTimeForm(ModelForm):
     class Meta:
         model = PollTime
         fields = ['date', 'start_time', 'end_time']
+        widgets = {
+            'date' : forms.TextInput(attrs={
+                "class": "form-control datepicker",
+                "autocomplete": "off",
+                "placeholder": "Ngày diễn ra"
+            }),
+            'start_time': forms.TextInput(attrs={
+                "class": "form-control timepicker",
+                "autocomplete": "off",
+                "placeholder": "Thời gian bắt đầu"
+            }),
+            'end_time': forms.TextInput(attrs={
+                "class": "form-control timepicker",
+                "autocomplete": "off",
+                "placeholder": "Thời gian kết thúc"
+            })
+        }
 
 
 class VoteForm(ModelForm):
