@@ -16,7 +16,10 @@ def poll(request, id):
 
 
 def show(request):
-    poll = PollUser.objects.get(user=request.user).poll
+    poll = PollUser.objects.all().values('poll__name', 'poll__location', 'is_voted')
+    for k in poll:
+        print(k['poll__name'])
+        print(type(k['is_voted']))
     return HttpResponse(poll)
 
 
@@ -32,3 +35,8 @@ def mypoll(request):
 
 def create(request):
     return render(request, "poll/create.html")
+
+
+def listpollisvote(request):
+    listpolls = PollUser.objects.all().values('poll__name', 'poll__location', 'is_voted')
+    return render(request, 'poll/polls_is_voted.html', {'listpolls': listpolls})

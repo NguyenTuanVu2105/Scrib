@@ -8,6 +8,7 @@ urlpatterns = [
     url(r"^show", views.show),
     url(r'^dashboard', views.dashboard, name="dashboard"),
     url(r"^mypoll/", views.mypoll, name='mypoll'),
-    url("^add/", views.create, name='add')
+    url("^add/", views.create, name='add'),
+    url("^pollisvoted/", views.listpollisvote, name='voted')
 ]
 

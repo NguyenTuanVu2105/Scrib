@@ -1,0 +1,29 @@
+{% extends "layout/base.html" %}
+{% load staticfiles %}
+{% block title%}Chi tiết{% endblock %}
+{% block content %}
+<div >
+    <h2>Các cuộc họp bạn đã voted</h2>
+<table class="table">
+    <thead>
+    <tr>
+        <th>Tên</th>
+        <th>Địa điểm</th>
+        <th>Ghi chú</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for k in listpolls %}
+        {% if k.is_voted == True  %}
+            <tr>
+                <td><a href="#">{{ k.poll__name}}</a></td>
+                <td>{{ k.poll__location }}</td>
+                <td>{{ k.poll__note }}</td>
+            </tr>
+
+        {% endif %}
+    {% endfor %}
+    </tbody>
+</table>
+</div>
+{% endblock %}
