@@ -9,19 +9,21 @@
     <tr>
         <th>Tên</th>
         <th>Địa điểm</th>
-        <th>Ghi chú</th>
+        <th>Số người tham gia </th>
     </tr>
     </thead>
     <tbody>
     {% for k in listpolls %}
-        {% if k.is_voted == True  %}
+        {
             <tr>
-                <td><a href="#">{{ k.poll__name}}</a></td>
-                <td>{{ k.poll__location }}</td>
-                <td>{{ k.poll__note }}</td>
+                <td><a href="#">{{ k.pop }}</a></td>
+                <td>{{ k.pop }}</td>
+                <td>{{ k.pop }}</td>
+
             </tr>
 
-        {% endif %}
+
+
     {% endfor %}
     </tbody>
 </table>
