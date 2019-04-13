@@ -1,21 +1,24 @@
 from django.views.generic.detail import SingleObjectMixin
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse,HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from app.core.views import LoginRequiredMixin
 from django.views.generic import FormView, CreateView
 from django.urls import reverse, reverse_lazy
 from .models import Poll, PollTime, PollUser
-from .forms import PollTimeForm, PollForm
+from .forms import PollTimeForm, PollForm, VoteForm
 # Create your views here.
 
 
 def poll(request, id):
     poll = Poll.objects.get(id=id)
-    return  render(request, 'poll/poll.html', {'poll': poll})
+    dates = PollTime.objects.filter(poll=poll)
+    users = PollUser.objects.filter(poll=poll)
+    return render(request, 'poll/detail.html', {'poll': poll, 'dates': dates, 'users': users})
 
 
 def show(request):
+
     # poll = PollUser.objects.all().values('poll__name', 'poll__location', 'is_voted')
     # for k in poll:
     #     print(k['poll__name'])
@@ -29,6 +32,8 @@ def show(request):
     return HttpResponse(polls)
 
 
+
+
 def dashboard(request):
     return render(request, "poll/dashboard.html")
 
@@ -40,6 +45,26 @@ def mypoll(request):
 
 
 def create(request):
+    if request.method == "POST":
+        # --- Xu ly Poll ---
+        form = PollForm(request.POST)
+        if form.is_valid():
+            poll = form.save(commit=False)
+            poll.user_create = request.user
+            poll.save()
+            poll_manager = PollUser(user=request.user, poll= poll, is_voted=True)
+            poll_manager.save()
+
+            #--- Xu ly time
+            cd = request.POST
+            dates = cd.getlist("date")
+            start_times = cd.getlist("start_time")
+            end_times = cd.getlist("end_time")
+            for i in range(len(dates)):
+                time = PollTime(poll=poll, date=dates[i], start_time=start_times[i], end_time=end_times[i])
+                time.save()
+                return HttpResponseRedirect(reverse_lazy("poll:mypoll"))
+
     return render(request, "poll/create.html")
 
 

@@ -1,0 +1,46 @@
+{% extends "layout/base.html" %}
+{% block title%}Chi tiết{% endblock %}
+{% block content %}
+    <div class="text-center">
+        <h1>{{poll.name}}</h1>
+        <h5>bởi {{ poll.user_create }} . {{ poll.date_create }}</h5>
+    </div>
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-11">
+                <h4> <i class="fas fa-map-marker-alt mr-15"></i> {{poll.location}}</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-11">
+                <h4> <i class="far fa-sticky-note mr-15"></i> {{poll.note}}</h4>
+            </div>
+        </div>
+<form>
+<div class="pd-10">
+            <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Người tham gia </th>
+                  {% for datetime in dates %}
+                        <th>{{ datetime.date }}
+                      {{ datetime.start_time }}
+                      {{ datetime.end_time }}</th>
+                  {% endfor %}
+              </tr>
+            </thead>
+            <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user }}</td>
+                    <td><i class="fas fa-check"></i></td>
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+</div>
+
+</form>
+ {% endblock %}

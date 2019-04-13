@@ -10,12 +10,13 @@
         <th>Tên</th>
         <th>Địa điểm</th>
         <th>Ghi chú</th>
+        <th>Hành động</th>
     </tr>
     </thead>
     <tbody>
     {% for mypoll in mypolls %}
     <tr>
-        <td><a href="#">{{ mypoll.name }}</a></td>
+        <td><a href= "{% url "poll:detail" mypoll.id %}">{{ mypoll.name }}</a></td>
         <td>{{ mypoll.location }}</td>
         <td>{{ mypoll.note }}</td>
     </tr>
