@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class Poll(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, unique=True)
     location = models.CharField(max_length=100)
     note = models.TextField()
     user_attend = models.ManyToManyField(User, through="PollUser", related_name="attend")
