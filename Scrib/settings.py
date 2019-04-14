@@ -77,8 +77,12 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'libraries': {
+                'custom_tags': 'app.poll.template_tags.custom_tags'
+            },
         },
     },
+
 ]
 
 TEMPLATE_DIRS = (

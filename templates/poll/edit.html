@@ -1,0 +1,110 @@
+{% extends "layout/base.html" %}
+{% load staticfiles %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'lib/jquery/jquery-ui.css' %}">
+    <link rel="stylesheet" href="{% static 'lib/datetimepicker/jquery-ui-timepicker-addon.css' %}">
+{% endblock %}
+
+{% block content %}
+    <!-- Main content -->
+        <div class="row pd-10">
+            <div class="col-md-12">
+
+                <form action="{% url "poll:edit" poll.id %}" method="POST">
+                    <h2>Sửa cuộc họp</h2>
+                    <hr>
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label>Tên cuộc họp</label>
+                                <input type="text" class="form-control" placeholder="Tên cuộc họp" value="{{ poll.name }}" name="name">
+                                <span class="help-block"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Địa điểm</label>
+                                <input type="text" class="form-control" placeholder="Địa điểm" name="location" value="{{ poll.location }}">
+                                <span class="help-block"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Ghi chú</label>
+                                <textarea class="form-control autosizeme" placeholder="Tham khảo" rows="5" name="note" cols="50">{{ poll.note }}</textarea>
+                                <span class="help-block"></span>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-12 form-group">
+                                    <label>Thời gian</label>
+                                    <div class="hidden" id="new_poll">
+                                        <div class="row mg-top-10">
+                                            <div class="col-md-3">
+                                                <input class="datepicker form-control" type="text" autocomplete="off" placeholder="Ngày diễn ra" name="date">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <input class="timepicker form-control" type="text" autocomplete="off" placeholder="Thời gian bắt đầu" name="start_time">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <input class="timepicker form-control" type="text" autocomplete="off" placeholder="Thời gian kết thúc" name="end_time">
+                                            </div>
+                                            <div class="col-md-1">
+                                                <button class="btn btn-sm btn-danger time-remove" type="button">
+                                                    <i class="fa fa-close"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% for time in times %}
+                                        <div class="row mg-top-10">
+                                            <div class="col-md-3">
+                                                <input class="datepicker form-control" type="text" autocomplete="off" placeholder="Ngày diễn ra" value="{{ time.date | date:"Y-m-d"}}" name="date">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <input class="timepicker form-control" type="text" autocomplete="off" placeholder="Thời gian bắt đầu" value="{{ time.start_time | time:"h:i" }}" name="start_time">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <input class="timepicker form-control" type="text" autocomplete="off" placeholder="Thời gian kết thúc" value="{{ time.end_time | time:"h:i"}}" name="end_time">
+                                            </div>
+                                            <div class="col-md-1">
+                                                <button class="btn btn-sm btn-danger time-remove" type="button">
+                                                    <i class="fa fa-close"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                        <div class="mg-top-10" id="add-time-before-me">
+                                            <button class="btn btn-sm btn-success" type="button" onclick="addPoll()">
+                                                <i class="fa fa-plus"></i> Thêm thời gian
+                                            </button>
+                                        </div>
+                                </div>
+                            </div>
+                        <!-- /.box-body -->
+                        <div class="box-footer">
+                            <input type="submit" value="Lưu" class="btn btn-primary pull-right mr-15">
+                        </div>
+                </form>
+            </div>
+        </div>
+
+
+    <!-- /.content -->
+{% endblock %}
+{% block js %}
+    <script src="{% static "lib/jquery/jquery-ui.js" %}"></script>
+    <script src="{% static "lib/datetimepicker/jquery-ui-timepicker-addon.js" %}"></script>
+    <script>
+         $(document).on('focus','.timepicker', function(){
+             $(this).removeClass('hasDatepicker').timepicker();
+         });
+         $(document).on('focus','.datepicker', function(){
+                          //$(this).datepicker();
+                          $(this).removeClass('hasDatepicker').datepicker();
+                          $(this).datepicker( "option", "dateFormat", "yy-mm-dd" );
+                       });
+         $('.time-remove').click(function () {
+                $(this).parent().parent().remove();
+        })
+    </script>
+    <script src="{% static 'js/poll_create.js' %}"></script>
+
+{% endblock %}

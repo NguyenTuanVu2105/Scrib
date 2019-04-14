@@ -1,4 +1,5 @@
 {% extends "layout/base.html" %}
+{% load custom_tags %}
 {% block title%}Chi tiết{% endblock %}
 {% block content %}
     <div class="text-center">
@@ -23,7 +24,7 @@
             <thead>
               <tr>
                 <th>Người tham gia </th>
-                  {% for datetime in dates %}
+                  {% for datetime in datetimes %}
                         <th>{{ datetime.date }}
                       {{ datetime.start_time }}
                       {{ datetime.end_time }}</th>
@@ -34,7 +35,15 @@
             {% for user in users %}
                 <tr>
                     <td>{{ user }}</td>
-                    <td><i class="fas fa-check"></i></td>
+                    {% for datetime in datetimes %}
+                    <td>
+                        {% for vote in votes %}
+                            {% if vote.user_id == user.user_id and datetime == vote.time %}
+                                <i class="fas fa-check"></i>
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                    {% endfor %}
                 </tr>
             {% endfor %}
 

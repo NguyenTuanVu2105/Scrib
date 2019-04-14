@@ -29,7 +29,7 @@ class PollTime(models.Model):
         db_table = "polltime"
 
     def __str__(self):
-        return str.format("{0} {1} - {2}", str(self.date), str(self.start_time), str(self.end_time))
+        return str.format("{0} {1} {2} - {3}",self.poll.name,  str(self.date), str(self.start_time), str(self.end_time))
 
 
 class PollUser(models.Model):

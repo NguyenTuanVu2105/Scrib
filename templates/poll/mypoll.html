@@ -1,24 +1,33 @@
 {% extends "layout/base.html" %}
 {% load staticfiles %}
+{% load custom_tags %}
 {% block title%}Chi tiết{% endblock %}
 {% block content %}
 <div >
     <h2>Các cuộc họp bạn đã tạo</h2>
-<table class="table">
+<table class="table table-striped">
     <thead>
     <tr>
-        <th>Tên</th>
-        <th>Địa điểm</th>
-        <th>Ghi chú</th>
-        <th>Hành động</th>
+        <th class="text-center">Tên</th>
+        <th class="text-center">Địa điểm</th>
+        <th class="text-center">Số người tham gia</th>
+        <th class="text-center">Số người đã vote</th>
+        <th class="text-center">Hành động</th>
     </tr>
     </thead>
     <tbody>
     {% for mypoll in mypolls %}
     <tr>
-        <td><a href= "{% url "poll:detail" mypoll.id %}">{{ mypoll.name }}</a></td>
-        <td>{{ mypoll.location }}</td>
-        <td>{{ mypoll.note }}</td>
+        <td class="text-center"><a href= "{% url "poll:detail" mypoll.id %}">{{ mypoll.name }}</a></td>
+        <td class="text-center">{{ mypoll.location }}</td>
+        <td class="text-center">{{ number_user_attends | get_item:mypoll.id }}</td>
+        <td class="text-center">{{ number_user_voted | get_item:mypoll.id }}</td>
+        <td class="text-center">
+            <div class="btn-group-vertical">
+                <a href="{% url "poll:edit" mypoll.id%}" class="btn btn-sm btn-warning">Sửa</a>
+                <a href="{% url "poll:delete" mypoll.id%}" class="btn btn-sm btn-danger">Xóa</a>
+            </div>
+        </td>
     </tr>
     {% endfor %}
     </tbody>

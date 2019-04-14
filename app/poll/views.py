@@ -1,34 +1,28 @@
 from django.views.generic.detail import SingleObjectMixin
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse,HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from app.core.views import LoginRequiredMixin
 from django.views.generic import FormView, CreateView
 from django.urls import reverse, reverse_lazy
-from .models import Poll, PollTime, PollUser
+from .models import Poll, PollTime, PollUser, Vote
 from .forms import PollTimeForm, PollForm, VoteForm
 # Create your views here.
 
 
 def poll(request, id):
     poll = Poll.objects.get(id=id)
-    dates = PollTime.objects.filter(poll=poll)
+    datetimes = PollTime.objects.filter(poll=poll)
     users = PollUser.objects.filter(poll=poll)
-    return render(request, 'poll/detail.html', {'poll': poll, 'dates': dates, 'users': users})
+    votes = Vote.objects.filter(time__poll=poll)
+    return render(request, 'poll/detail.html', {'poll': poll, 'datetimes': datetimes, 'users': users, 'votes': votes})
 
 
 def show(request):
-
-    # poll = PollUser.objects.all().values('poll__name', 'poll__location', 'is_voted')
-    # for k in poll:
-    #     print(k['poll__name'])
-    #     print(type(k['is_voted']))
-    # return HttpResponse(poll)
     pollusers = PollUser.objects.filter(is_voted=True)
     polls = []
-    for i in range(len(pollusers)):
-        polls.append(pollusers[i].poll)
-    print(polls[0].note)
+    for polluser in pollusers:
+        polls.append(polluser.poll)
     return HttpResponse(polls)
 
 
@@ -40,8 +34,16 @@ def dashboard(request):
 
 @login_required
 def mypoll(request):
-    mypolls = Poll.objects.filter(user_create_id=request.user.id)
-    return render(request, 'poll/mypoll.html', {'mypolls': mypolls})
+    mypolls = Poll.objects.filter(user_create=request.user)
+    number_user_attends = {}
+    number_user_voted = {}
+    for poll in mypolls:
+        user_attend = PollUser.objects.filter(poll=poll)
+        user_voted = PollUser.objects.filter(poll=poll, is_voted=True)
+        number_user_attends[poll.id] = len(user_attend)
+        number_user_voted[poll.id] = len(user_voted)
+    return render(request, 'poll/mypoll.html', {'mypolls': mypolls, 'number_user_attends': number_user_attends, 'number_user_voted': number_user_voted,})
+
 
 
 def create(request):
@@ -52,10 +54,11 @@ def create(request):
             poll = form.save(commit=False)
             poll.user_create = request.user
             poll.save()
+
             poll_manager = PollUser(user=request.user, poll= poll, is_voted=True)
             poll_manager.save()
 
-            #--- Xu ly time
+            #--- Xu ly time ---
             cd = request.POST
             dates = cd.getlist("date")
             start_times = cd.getlist("start_time")
@@ -63,7 +66,7 @@ def create(request):
             for i in range(len(dates)):
                 time = PollTime(poll=poll, date=dates[i], start_time=start_times[i], end_time=end_times[i])
                 time.save()
-                return HttpResponseRedirect(reverse_lazy("poll:mypoll"))
+            return HttpResponseRedirect(reverse_lazy("poll:mypoll"))
 
     return render(request, "poll/create.html")
 
@@ -86,3 +89,31 @@ def listpollisvote(request):
 
     return render(request, 'poll/polls_is_voted.html', {'listpolls': polls})
 
+
+def edit(request, id):
+    poll = Poll.objects.get(id=id)
+    times = PollTime.objects.filter(poll=poll)
+    if request.method == "GET":
+        return render(request, "poll/edit.html", {'poll': poll, 'times': times})
+    elif request.method == "POST":
+            # --- Xu ly Poll ---
+            cd = request.POST
+            poll.name = cd.get('name')
+            poll.location = cd.get('location')
+            poll.note = cd.get('note')
+            poll.save()
+            #--- Xu ly time
+            for time in times:
+                time.delete()
+            dates = cd.getlist("date")
+            start_times = cd.getlist("start_time")
+            end_times = cd.getlist("end_time")
+            for i in range(len(dates)):
+                time = PollTime(poll=poll, date=dates[i], start_time=start_times[i], end_time=end_times[i])
+                time.save()
+            return HttpResponseRedirect(reverse_lazy("poll:mypoll"))
+
+def delete(request, id):
+    poll = get_object_or_404(Poll, id=id)
+    poll.delete()
+    return HttpResponseRedirect(reverse_lazy("poll:mypoll"))

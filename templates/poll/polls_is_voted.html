@@ -1,5 +1,6 @@
 {% extends "layout/base.html" %}
 {% load staticfiles %}
+
 {% block title%}Chi tiết{% endblock %}
 {% block content %}
 <div >
@@ -16,16 +17,12 @@
     {% for k in listpolls %}
         {
             <tr>
-<<<<<<< Updated upstream
                 <td><a href="#">{{ k.pop }}</a></td>
                 <td>{{ k.pop }}</td>
                 <td>{{ k.pop }}</td>
-
-=======
                 <td><a href="{% url "poll:detail" k.poll__id %}">{{ k.poll__name}}</a></td>
                 <td>{{ k.poll__location }}</td>
                 <td>{{ k.poll__note }}</td>
->>>>>>> Stashed changes
             </tr>
 
 
