@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="{% static 'css/base/style.css' %}">
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'css/base/fontawesome.css' %}">
 
     {% block css %}
     {% endblock %}
@@ -28,7 +28,7 @@
                         {% include "layout/sidebar.html" %}
                     </div>
                 {% endblock %}
-                    <div class="col-sm-8 col-md-9 content">
+                    <div class="col-sm-8 col-md-9 content clear">
 
                         {% block content %}
                         {% endblock %}

@@ -7,10 +7,14 @@ from django.views.generic import FormView, CreateView
 from django.urls import reverse, reverse_lazy
 from .models import Poll, PollTime, PollUser, Vote
 from .forms import PollTimeForm, PollForm, VoteForm
+from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 
-
+@csrf_exempt
 def poll(request, id):
+    if request.is_ajax():
+        pass
+
     poll = Poll.objects.get(id=id)
     datetimes = PollTime.objects.filter(poll=poll)
     users = PollUser.objects.filter(poll=poll)
