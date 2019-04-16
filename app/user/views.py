@@ -28,6 +28,11 @@ class LoginView(FormView):
     template_name = "user/login.html"
     form_class = AuthenticationForm
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['next'] = self.request.GET.get('next', False)
+        return context
+
     def get_success_url(self):
         nextlink = self.request.POST.get('next', False)
         if nextlink:
@@ -38,7 +43,6 @@ class LoginView(FormView):
         user = form.get_user()
         auth_login(self.request, user)
         return super(LoginView, self).form_valid(form)
-
 
     def form_invalid(self, form):
         response = super(LoginView, self).form_invalid(form)

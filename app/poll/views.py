@@ -11,6 +11,7 @@ from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 
 @csrf_exempt
+@login_required
 def poll(request, id):
     if request.is_ajax():
         pass
@@ -21,7 +22,7 @@ def poll(request, id):
     votes = Vote.objects.filter(time__poll=poll)
     return render(request, 'poll/detail.html', {'poll': poll, 'datetimes': datetimes, 'users': users, 'votes': votes})
 
-
+@login_required
 def show(request):
     pollusers = PollUser.objects.filter(is_voted=True)
     polls = []
@@ -31,7 +32,7 @@ def show(request):
 
 
 
-
+@login_required
 def dashboard(request):
     return render(request, "poll/dashboard.html")
 
@@ -49,7 +50,7 @@ def mypoll(request):
     return render(request, 'poll/mypoll.html', {'mypolls': mypolls, 'number_user_attends': number_user_attends, 'number_user_voted': number_user_voted,})
 
 
-
+@login_required
 def create(request):
     if request.method == "POST":
         # --- Xu ly Poll ---
@@ -74,7 +75,7 @@ def create(request):
 
     return render(request, "poll/create.html")
 
-
+@login_required
 def listpollisvote(request):
     # listpolls = PollUser.objects.all().values('poll__name', 'poll__location', 'is_voted')
     pollusers = PollUser.objects.filter(is_voted=True)
@@ -93,7 +94,7 @@ def listpollisvote(request):
 
     return render(request, 'poll/polls_is_voted.html', {'listpolls': polls})
 
-
+@login_required
 def edit(request, id):
     poll = Poll.objects.get(id=id)
     times = PollTime.objects.filter(poll=poll)
@@ -117,6 +118,7 @@ def edit(request, id):
                 time.save()
             return HttpResponseRedirect(reverse_lazy("poll:mypoll"))
 
+@login_required
 def delete(request, id):
     poll = get_object_or_404(Poll, id=id)
     poll.delete()

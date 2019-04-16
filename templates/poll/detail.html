@@ -21,7 +21,7 @@
 
            <div class="collapse navbar-collapse  navbar-ex1-collapse">
               <ul class="nav navbar-nav">
-                 <li><button class="btn btn-add btn-red" id="btn-add-people" onclick=""><i class="fas fa-user-plus"></i> Mời người tham gia</button></li>
+                 <li><button class="btn btn-add btn-red" id="btn-add-people" onclick="ShowForm()"><i class="fas fa-user-plus"></i> Mời người tham gia</button></li>
                  <li><a href="#" class="btn btn-add"><i class="fas fa-pen"></i> Sửa</a></li>
                   <li><a href="#" class="btn btn-add">Khác <i class="fas fa-caret-down"></i> </a></li>
               </ul>
@@ -29,21 +29,22 @@
         </nav>
     </div>
     <div class="hidden" id="url"> {{ request.path }}</div>
-    <form id="invite-form" method="POST">
-        {% csrf_token %}
-        <div class="row mg-15 invite-container text-center">
-            <button class="btn btn-remove"><i class="fas fa-times"></i></button>
-            <h3>Mời người tham gia</h3>
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2  invite-input text-left tags-input">
+    <div id="invite" class="hidden">
+        <form id="invite-form" method="POST">
+            {% csrf_token %}
+            <div class="row mg-15 invite-container text-center">
+                <button class="btn btn-remove" onclick="HideForm()"><i class="fas fa-times"></i></button>
+                <h3>Mời người tham gia</h3>
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2  invite-input text-left tags-input">
+                    </div>
                 </div>
+
+
+                <button class="btn btn-submit" onclick="postUserList()"><i class="fas fa-user-plus"></i> Mời</button>
             </div>
-
-
-            <button class="btn btn-submit" onclick="postUserList()"><i class="fas fa-user-plus"></i> Mời</button>
-        </div>
-    </form>
-
+        </form>
+    </div>
     <div class="text-center">
         <h1>{{poll.name}}</h1>
         <h5>bởi {{ poll.user_create }} . {{ poll.date_create }}</h5>
@@ -97,6 +98,7 @@
  {% endblock %}
 
 {% block js %}
+    <script src="{% static "js/poll/detail/hide_show_form.js" %}"></script>
     <script src="{% static "js/poll/detail/invite.js" %}"></script>
-    <script src="{% static "js/poll/detail/detail.js" %}"></script>
+    <script src="{% static "js/poll/detail/form_invite.js" %}"></script>
 {% endblock %}

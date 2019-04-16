@@ -13,6 +13,7 @@ function postUserList() {
                 'invited_users' : userdata,
             },
             success: function () {
+                alert("Mời thành công");
             }
         });
         return false;
