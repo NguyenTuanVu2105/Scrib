@@ -2,12 +2,16 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
+
+<body class="page page-template fixed-header contains-posts no-slider icons-style-light parallax-header fixed-header-scroll bg-solid">
+        <div class="wrapper">
+            {% include 'layout/header.html' %}<head>
     <meta charset="UTF-8">
     <title>{% block title %}Scrib{% endblock %}</title>
 
     <link rel="stylesheet" href="{% static 'lib/bootstrap/bootstrap.min.css' %}">
 
+            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 
     <link rel="stylesheet" href="{% static 'css/base/style.css' %}">
 
@@ -16,11 +20,7 @@
     {% block css %}
     {% endblock %}
 
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 </head>
-<body class="page page-template fixed-header contains-posts no-slider icons-style-light parallax-header fixed-header-scroll bg-solid">
-        <div class="wrapper">
-            {% include 'layout/header.html' %}
             <div class="container mg-top-40" style="margin-top:40px">
                 <div class="row">
                     <div class="col-sm-12 col-md-12 content clear">

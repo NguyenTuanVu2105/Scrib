@@ -287,3 +287,7 @@ footer{
     .mb-20{
         margin-bottom: 20px;
     }
+
+    .errorlist{
+        color: red;
+    }

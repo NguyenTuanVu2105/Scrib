@@ -20,15 +20,9 @@ def poll(request, id):
 
     if request.is_ajax():
         #---Chuc nang Moi tham gia cuoc hop---
-        usernames = request.POST.get('users_invited')
-        usernames = str(usernames).split(", ")
-        for username in usernames:
-            if '@' in username:
-                user = User.objects.get(email=username)
-            else:
-                user = User.objects.get(username=username.strip())
-            polluser = PollUser(user=user, poll=poll, is_voted=False)
-            polluser.save()
+        emails = request.POST.get('users_invited')
+        emails = str(emails).split(", ")
+
 
     datetimes = PollTime.objects.filter(poll=poll)
     users = PollUser.objects.filter(poll=poll)

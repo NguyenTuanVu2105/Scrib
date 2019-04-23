@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'social_django',
 
     'bootstrap3',
     'bootstrap_datepicker_plus',
@@ -69,7 +68,7 @@ ROOT_URLCONF = 'Scrib.urls'
 AUTHENTICATION_BACKENDS = (
    'django.contrib.auth.backends.ModelBackend',
 )
-
+AUTH_USER_EMAIL_UNIQUE = True
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

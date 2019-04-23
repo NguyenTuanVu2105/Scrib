@@ -28,15 +28,15 @@
             <h2>Đăng ký</h2>
             <div class="form-group">
                 <input type="text" class="form-control" name="username" placeholder="Tên tài khoản" required="required">
-                <div class="error-box error-message">{{ form.username.errors }}</div>
+                <div class="error-box errors error-message">{{ form.username.errors }}</div>
             </div>
             <div class="form-group">
                 <input type="email" class="form-control" name="email" placeholder="Email" required="required">
-                <div class="error-box error-message">{{ form.email.errors }}</div>
+                <div class="error-box errors error-message">{{ form.email.errors }}</div>
             </div>
             <div class="form-group">
                 <input type="password" class="form-control" name="password1" placeholder="Mật khẩu" required="required">
-                <div class="error-box error-message">{{ form.password1.errors }}</div>
+                <div class="error-box errors error-message">{{ form.password1.errors }}</div>
             </div>
             <div class="form-group">
                 <input type="password" class="form-control" name="password2" placeholder="Nhập lại mật khẩu" required="required">
