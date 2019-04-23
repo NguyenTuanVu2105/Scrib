@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 class Poll(models.Model):
     name = models.CharField(max_length=100, unique=True)
     location = models.CharField(max_length=100)
-    note = models.TextField()
+    note = models.TextField(null=True)
     user_attend = models.ManyToManyField(User, through="PollUser", related_name="attend")
     date_create = models.DateTimeField(auto_now=True)
     user_create = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="create")

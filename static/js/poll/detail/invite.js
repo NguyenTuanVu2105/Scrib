@@ -1,21 +1,23 @@
 function postUserList() {
-    list = $('.tag');
+    list = $('.tagit-label');
+    console.log(list.length);
     userdata = "";
     for (var i=0; i<list.length; i++){
-        userdata += list[i].textContent + ", ";
+        if (i === list.length - 1)
+            userdata += list[i].textContent;
+        else
+            userdata += list[i].textContent + ", ";
     }
-    $('#invite-form').submit(function (e) {
-        e.preventDefault();
-        $.ajax({
+    $.ajax({
             type: "POST",
             url: $('#url').text(),
             data: {
-                'invited_users' : userdata,
+                'users_invited' : userdata,
             },
             success: function () {
                 alert("Mời thành công");
+                HideForm(event);
             }
         });
-        return false;
-    });
+
 }

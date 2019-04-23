@@ -26,8 +26,7 @@ SECRET_KEY = '1vsamzyu4-y^h+*cr^n2+y0jv1*gy__pw_ytrqcy*7wv#5zht&'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '127.0.0.1',
-    '192.168.1.102',
+    '*'
 ]
 
 
@@ -43,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social_django',
 
     'bootstrap3',
     'bootstrap_datepicker_plus',
@@ -61,9 +61,14 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
 ]
 
 ROOT_URLCONF = 'Scrib.urls'
+
+AUTHENTICATION_BACKENDS = (
+   'django.contrib.auth.backends.ModelBackend',
+)
 
 TEMPLATES = [
     {
@@ -84,6 +89,7 @@ TEMPLATES = [
     },
 
 ]
+
 
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, "templates"),
