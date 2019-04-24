@@ -1,0 +1,52 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Scrib{% endblock %}</title>
+
+    <link rel="stylesheet" href="{% static 'lib/bootstrap/bootstrap.min.css' %}">
+
+    <link rel="stylesheet" href="{% static "css/base/style.css" %}">
+
+    <link rel="stylesheet" href="{% static "css/user/login.css" %}">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+</head>
+<body class="page page-template fixed-header contains-posts no-slider icons-style-light parallax-header fixed-header-scroll">
+        <div class="wrapper">
+            {% include 'layout/header.html' %}
+            <div class="container mg-top-15">
+                <div class="row">
+     <div class="login-form">
+        <form action="#" method="post">
+            <h2 class="text-center">Nhập mã xác nhận</h2>
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Mã xác nhận" name="activate" required="required">
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block">Xác nhận</button>
+            </div>
+            <div class="clearfix">
+                <a href="#" class="pull-right">Gửi lại mã xác nhận</a>
+            </div>
+        </form>
+     </div>
+                </div>
+                <div class="clear"></div>
+
+            </div>
+      <!--  {% include 'layout/footer.html' %} -->
+    </div>
+
+
+    <!--Javascript-->
+    <script type='text/javascript' src="{% static 'lib/jquery/jquery-3.3.1.min.js' %}"></script>
+    <script type='text/javascript' src="{% static 'lib/bootstrap/bootstrap.min.js' %}"></script>
+</body>
+</html>
