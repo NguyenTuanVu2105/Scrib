@@ -11,6 +11,7 @@ from .forms import PollTimeForm, PollForm, VoteForm
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from django.core.mail import send_mail
+from django.contrib.sites.shortcuts import get_current_site
 import json
 # Create your views here.
 
@@ -18,14 +19,18 @@ import json
 @login_required
 def poll(request, id):
     poll = Poll.objects.get(id=id)
+    current_site = get_current_site(request)
 
     if request.is_ajax():
         #---Chuc nang Moi tham gia cuoc hop---
         emails = request.POST.get('users_invited')
         emails = str(emails).split(", ")
-        send_mail("Thư mời tham gia cuộc họp", "Tham gia cuộc họp theo đường dẫn sau: " + "127.0.0.1:8000/poll/" + id,
+        send_mail("Thư mời tham gia cuộc họp", "Tham gia cuộc họp theo đường dẫn sau: " + current_site.domain +"/poll/" + id,
                   "scribteam123@gmail.com", [emails], fail_silently=False)
-
+        for email in emails:
+            user = User.objects.get(email = email)
+            poll_user = PollUser(user = user, poll = poll, is_voted = False)
+            poll_user.save()
 
     datetimes = PollTime.objects.filter(poll=poll)
     users = PollUser.objects.filter(poll=poll)
