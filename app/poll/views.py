@@ -10,6 +10,7 @@ from django.contrib.auth.models import User
 from .forms import PollTimeForm, PollForm, VoteForm
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
+from django.core.mail import send_mail
 import json
 # Create your views here.
 
@@ -22,6 +23,8 @@ def poll(request, id):
         #---Chuc nang Moi tham gia cuoc hop---
         emails = request.POST.get('users_invited')
         emails = str(emails).split(", ")
+        send_mail("Thư mời tham gia cuộc họp", "Tham gia cuộc họp theo đường dẫn sau: " + "localhost/poll/" + id,
+                  "scribteam123@gmail.com", [emails], fail_silently=False)
 
 
     datetimes = PollTime.objects.filter(poll=poll)
