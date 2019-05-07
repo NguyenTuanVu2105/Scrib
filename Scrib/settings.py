@@ -18,6 +18,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'scribteam123@gmail.com'
+EMAIL_HOST_PASSWORD = '@ndongdatvu123'
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '1vsamzyu4-y^h+*cr^n2+y0jv1*gy__pw_ytrqcy*7wv#5zht&'

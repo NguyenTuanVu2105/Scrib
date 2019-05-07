@@ -8,6 +8,7 @@ from django.contrib.auth import authenticate, login as auth_login, logout
 from django.contrib import messages
 from django.views.generic import FormView, CreateView
 from django.urls import reverse, reverse_lazy
+from django.core.mail import send_mail
 # Create your views here.
 
 
@@ -28,6 +29,9 @@ class SignUpView(CreateView):
         return reverse_lazy("user:login")
 
     def form_valid(self, form):
+        active = 'abdbNojjhf3984'
+        send_mail('Activate account', 'Đây là mã xác nhận của bạn: ' + active, 'scribteam123@gmail.com',
+                  ['lemaian034@gmail.com'], fail_silently=False)
         form.save()
         messages.success(self.request, "Bạn đã đăng ký thành công. Xin mời đăng nhập")
         return HttpResponseRedirect(self.get_success_url())
