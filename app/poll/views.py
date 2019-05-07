@@ -23,7 +23,7 @@ def poll(request, id):
         #---Chuc nang Moi tham gia cuoc hop---
         emails = request.POST.get('users_invited')
         emails = str(emails).split(", ")
-        send_mail("Thư mời tham gia cuộc họp", "Tham gia cuộc họp theo đường dẫn sau: " + "localhost/poll/" + id,
+        send_mail("Thư mời tham gia cuộc họp", "Tham gia cuộc họp theo đường dẫn sau: " + "127.0.0.1:8000/poll/" + id,
                   "scribteam123@gmail.com", [emails], fail_silently=False)
 
 
