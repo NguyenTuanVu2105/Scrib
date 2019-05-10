@@ -1,0 +1,1 @@
+web: gunicorn Scrib.wsgi --log-file -
