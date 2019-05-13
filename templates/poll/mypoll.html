@@ -4,7 +4,8 @@
 {% block title%}Chi tiết{% endblock %}
 {% block content %}
 <div >
-    <h2>Các cuộc họp bạn đã tạo</h2>
+    <h2>Tất cả cuộc họp</h2>
+    <hr>
 <table class="table table-striped">
     <thead>
     <tr>
@@ -12,22 +13,15 @@
         <th class="text-center">Địa điểm</th>
         <th class="text-center">Số người tham gia</th>
         <th class="text-center">Số người đã vote</th>
-        <th class="text-center">Hành động</th>
     </tr>
     </thead>
     <tbody>
-    {% for mypoll in mypolls %}
+    {% for poll in polls %}
     <tr>
-        <td class="text-center"><a href= "{% url "poll:detail" mypoll.id %}">{{ mypoll.name }}</a></td>
-        <td class="text-center">{{ mypoll.location }}</td>
-        <td class="text-center">{{ number_user_attends | get_item:mypoll.id }}</td>
-        <td class="text-center">{{ number_user_voted | get_item:mypoll.id }}</td>
-        <td class="text-center">
-            <div class="btn-group-vertical">
-                <a href="{% url "poll:edit" mypoll.id%}" class="btn btn-sm btn-warning">Sửa</a>
-                <a href="{% url "poll:delete" mypoll.id%}" class="btn btn-sm btn-danger">Xóa</a>
-            </div>
-        </td>
+        <td class="text-center"><a href= "{% url "poll:detail" poll.id %}">{{ poll.name }}</a></td>
+        <td class="text-center">{{ poll.location }}</td>
+        <td class="text-center">{{ number_user_attends | get_item:poll.id }}</td>
+        <td class="text-center">{{ number_user_voted | get_item:poll.id }}</td>
     </tr>
     {% endfor %}
     </tbody>

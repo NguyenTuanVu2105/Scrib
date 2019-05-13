@@ -6,25 +6,26 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container">
+    <div class="container" style="padding: 20px">
     <h3>Tạo cuộc họp</h3>
     <hr>
     <div class="row top-dashboard mg-40">
         <div class="col-md-4 text-center">
             <img src="{% static 'img/cal1.png' %}">
-            <a href="" style="margin: 10px">Tạo một lịch họp</a>
+            <a href="{% url 'poll:add' %}" style="margin: 10px">Tạo một lịch họp</a>
         </div>
         <div class="col-md-4 text-center">
             <img src="{% static 'img/cal2.png' %}">
-            <a href="">Đưa ra lựa chọn</a>
+            <a href="{% url 'poll:add' %}">Đưa ra lựa chọn</a>
         </div>
         <div class="col-md-4 text-center">
             <img src="{% static 'img/cal3.png' %}">
-            <a href="" style="margin: 10px">Xem tất cả cuộc họp</a>
+            <a href="{% url 'poll:mypoll' %}" style="margin: 10px">Xem tất cả cuộc họp</a>
         </div>
     </div>
     <h3>Cuộc họp của tôi</h3>
     <hr>
+    {% if mypolls %}
     <table class="table table-striped">
         <thead>
         <tr>
@@ -45,9 +46,14 @@
         {% endfor %}
         </tbody>
     </table>
+        {% else %}
+                <p>Bạn chưa tạo cuộc họp nào</p>
+    {% endif %}
+    <br>
 
-        <h3>Cuộc họp tôi đã tham gia</h3>
+        <h3>Cuộc họp tôi được mời</h3>
         <hr>
+    {% if attend_polls %}
     <table class="table table-striped">
         <thead>
         <tr>
@@ -68,6 +74,9 @@
         {% endfor %}
         </tbody>
     </table>
+    {% else %}
+    <p>Bạn chưa được mời hay tham gia cuộc họp nào</p>
+    {% endif %}
     </div>
 {% endblock %}
 

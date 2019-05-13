@@ -83,15 +83,16 @@ def dashboard(request):
 
 
 def mypoll(request):
-    mypolls = Poll.objects.filter(user_create=request.user)
+    poll_users = PollUser.objects.filter(user=request.user)
+    polls = [x.poll for x in poll_users]
     number_user_attends = {}
     number_user_voted = {}
-    for poll in mypolls:
+    for poll in polls:
         user_attend = PollUser.objects.filter(poll=poll)
         user_voted = PollUser.objects.filter(poll=poll, is_voted=True)
         number_user_attends[poll.id] = len(user_attend)
         number_user_voted[poll.id] = len(user_voted)
-    return render(request, 'poll/mypoll.html', {'mypolls': mypolls, 'number_user_attends': number_user_attends, 'number_user_voted': number_user_voted,})
+    return render(request, 'poll/mypoll.html', {'polls': polls, 'number_user_attends': number_user_attends, 'number_user_voted': number_user_voted,})
 
 
 
