@@ -13,6 +13,5 @@ urlpatterns = [
     url(r"^pollistvoted/", views.listpollisvote, name='voted'),
     url(r"^delete/(\d+)/", views.delete, name="delete"),
     url(r"^json/user/", views.autocompleteUser)
-
 ]
 

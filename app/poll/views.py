@@ -49,7 +49,36 @@ def show(request):
 
 
 def dashboard(request):
-    return render(request, "poll/dashboard.html")
+    mypolls = Poll.objects.filter(user_create=request.user)
+    number_user_attends = {}
+    number_user_voted = {}
+    for poll in mypolls:
+        user_attend = PollUser.objects.filter(poll=poll)
+        user_voted = PollUser.objects.filter(poll=poll, is_voted=True)
+        number_user_attends[poll.id] = len(user_attend)
+        number_user_voted[poll.id] = len(user_voted)
+
+    pollusers = PollUser.objects.filter(user=request.user)
+    attend_poll = []
+    for polluser in pollusers:
+        if polluser.poll.user_create != request.user:
+            attend_poll.append(polluser.poll)
+    attend_number_user_attends = {}
+    attend_number_user_voted = {}
+    for poll in attend_poll:
+        user_attend = PollUser.objects.filter(poll=poll)
+        user_voted = PollUser.objects.filter(poll=poll, is_voted=True)
+        attend_number_user_attends[poll.id] = len(user_attend)
+        attend_number_user_voted[poll.id] = len(user_voted)
+
+    return render(request, "poll/dashboard.html", {
+        'mypolls': mypolls,
+        'number_user_attends': number_user_attends,
+        'number_user_voted': number_user_voted,
+        'attend_polls': attend_poll,
+        'attend_number_user_attends': attend_number_user_attends,
+        'attend_number_user_voted': attend_number_user_voted,
+    })
 
 
 

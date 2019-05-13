@@ -1,10 +1,74 @@
 {% extends "layout/base.html" %}
+{% load staticfiles %}
+{% load custom_tags %}
 
 {% block css %}
 {% endblock %}
 
 {% block content %}
+    <div class="container">
+    <h3>Tạo cuộc họp</h3>
+    <hr>
+    <div class="row top-dashboard mg-40">
+        <div class="col-md-4 text-center">
+            <img src="{% static 'img/cal1.png' %}">
+            <a href="" style="margin: 10px">Tạo một lịch họp</a>
+        </div>
+        <div class="col-md-4 text-center">
+            <img src="{% static 'img/cal2.png' %}">
+            <a href="">Đưa ra lựa chọn</a>
+        </div>
+        <div class="col-md-4 text-center">
+            <img src="{% static 'img/cal3.png' %}">
+            <a href="" style="margin: 10px">Xem tất cả cuộc họp</a>
+        </div>
+    </div>
+    <h3>Cuộc họp của tôi</h3>
+    <hr>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th class="text-center">Tên</th>
+            <th class="text-center">Địa điểm</th>
+            <th class="text-center">Số người tham gia</th>
+            <th class="text-center">Số người đã vote</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for mypoll in mypolls %}
+        <tr>
+            <td class="text-center"><a href= "{% url "poll:detail" mypoll.id %}">{{ mypoll.name }}</a></td>
+            <td class="text-center">{{ mypoll.location }}</td>
+            <td class="text-center">{{ number_user_attends | get_item:mypoll.id }}</td>
+            <td class="text-center">{{ number_user_voted | get_item:mypoll.id }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
+        <h3>Cuộc họp tôi đã tham gia</h3>
+        <hr>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th class="text-center">Tên</th>
+            <th class="text-center">Địa điểm</th>
+            <th class="text-center">Số người tham gia</th>
+            <th class="text-center">Số người đã vote</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for mypoll in attend_polls %}
+        <tr>
+            <td class="text-center"><a href= "{% url "poll:detail" mypoll.id %}">{{ mypoll.name }}</a></td>
+            <td class="text-center">{{ mypoll.location }}</td>
+            <td class="text-center">{{ attend_number_user_attends | get_item:mypoll.id }}</td>
+            <td class="text-center">{{ attend_number_user_voted | get_item:mypoll.id }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
 {% endblock %}
 
 {% block js %}

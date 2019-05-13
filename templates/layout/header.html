@@ -10,16 +10,17 @@
     </div>
     <ul class="nav navbar-nav navbar-right">
         {% if request.user.is_authenticated %}
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ request.user }} <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="{% url 'poll:dashboard' %}">Dashboard</a></li>
-                            <li><a href="{% url 'poll:add' %}">Thêm cuộc họp</a></li>
-                            <li><a href="{% url "poll:mypoll" %}">Cuộc họp của tôi</a></li>
-                            <li class="divider"></li>
-                            <li><a href="{% url "user:logout" %}">Đăng xuất</a></li>
-                        </ul>
-                    </li>
+
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ request.user }} <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="{% url 'poll:dashboard' %}">Dashboard</a></li>
+                    <li><a href="{% url 'poll:add' %}">Thêm cuộc họp</a></li>
+                    <li><a href="{% url "poll:mypoll" %}">Cuộc họp của tôi</a></li>
+                    <li class="divider"></li>
+                    <li><a href="{% url "user:logout" %}">Đăng xuất</a></li>
+                </ul>
+            </li>
 
         {% else %}
           <li><a href="{% url 'user:signup' %}"><i class="fas fa-user-plus"></i> Đăng ký </a></li>

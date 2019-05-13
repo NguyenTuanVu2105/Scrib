@@ -3,9 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<body class="page page-template fixed-header contains-posts no-slider icons-style-light parallax-header fixed-header-scroll bg-solid">
-        <div class="wrapper">
-            {% include 'layout/header.html' %}<head>
+            <head>
     <meta charset="UTF-8">
     <title>{% block title %}Scrib{% endblock %}</title>
 
@@ -21,6 +19,9 @@
     {% endblock %}
 
 </head>
+            <body class="page page-template fixed-header contains-posts no-slider icons-style-light parallax-header fixed-header-scroll bg-solid">
+        <div class="wrapper">
+            {% include 'layout/header.html' %}
             <div class="container mg-top-40" style="margin-top:40px">
                 <div class="row">
                     <div class="col-sm-12 col-md-12 content clear">
