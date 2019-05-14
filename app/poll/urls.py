@@ -10,7 +10,6 @@ urlpatterns = [
     url(r"^mypoll/", views.mypoll, name='mypoll'),
     url(r"^add/", views.create, name='add'),
     url(r"^edit/(\d+)/", views.edit, name='edit'),
-    url(r"^pollistvoted/", views.listpollisvote, name='voted'),
     url(r"^delete/(\d+)/", views.delete, name="delete"),
     url(r"^json/user/", views.autocompleteUser)
 ]
