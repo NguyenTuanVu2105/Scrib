@@ -9,6 +9,8 @@ from django.contrib import messages
 from django.views.generic import FormView, CreateView
 from django.urls import reverse, reverse_lazy
 from django.core.mail import send_mail
+
+
 # Create your views here.
 
 
@@ -29,16 +31,17 @@ class SignUpView(CreateView):
         return reverse_lazy("user:activate")
 
     def form_valid(self, form):
-        user = form.save(commit = False)
+        user = form.save(commit=False)
         user.is_active = False
         user.save()
         active = 'abdbNojjhf3984'
         email = form.cleaned_data.get('email')
         send_mail('Activate account', 'Đây là mã xác nhận của bạn: ' + active, 'scribteam123@gmail.com',
                   [email], fail_silently=False)
-        #form.save()
-        #messages.success(self.request, "Bạn đã đăng ký thành công. Xin mời đăng nhập")
+        # form.save()
+        # messages.success(self.request, "Bạn đã đăng ký thành công. Xin mời đăng nhập")
         return render(self.request, "user/activate.html", {'email': email, 'active': active})
+
 
 def activate(request):
     if (request.method == 'POST'):
@@ -46,12 +49,12 @@ def activate(request):
         active = request.POST['activate']
         emailIndex = request.POST['emailIndex']
         if (active == activeIndex):
-            user = User.objects.get(email = emailIndex)
+            user = User.objects.get(email=emailIndex)
             user.is_active = True
             user.save()
             messages.success(request, "Bạn đã đăng ký thành công. Xin mời đăng nhập")
             return HttpResponseRedirect(reverse_lazy("user:login"))
-    #return render(request, "user/activate.html")
+    # return render(request, "user/activate.html")
 
 
 class LoginView(FormView):
@@ -81,3 +84,6 @@ class LoginView(FormView):
         return response
 
 
+def webhook(request):
+    params = request.headers
+    return HttpResponse(params, request.body)
