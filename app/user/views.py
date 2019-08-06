@@ -85,5 +85,4 @@ class LoginView(FormView):
 
 
 def webhook(request):
-    params = request.headers
-    return HttpResponse(params, request.body)
+    return HttpResponse(request.body)
