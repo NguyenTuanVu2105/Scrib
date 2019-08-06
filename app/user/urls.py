@@ -9,5 +9,6 @@ urlpatterns = [
     url(r'^login/', views.LoginView.as_view(), name="login"),
     url(r'^logout/', LogoutView.as_view(), name="logout"),
     url(r'^activate/', views.activate, name="activate"),
-    url(r'^webhook/', views.webhook, name='webhook')
+    url(r'^webhook/', views.webhook, name='webhook'),
+    url(r'^log/', views.log, name='webhook')
 ]

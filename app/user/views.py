@@ -9,7 +9,7 @@ from django.contrib import messages
 from django.views.generic import FormView, CreateView
 from django.urls import reverse, reverse_lazy
 from django.core.mail import send_mail
-
+import logging
 
 # Create your views here.
 
@@ -85,4 +85,8 @@ class LoginView(FormView):
 
 
 def webhook(request):
-    return HttpResponse(request.body)
+    return HttpResponse(request.headers)
+
+def log(request):
+    logger = logging.getLogger("info")
+    logger.info('something')
